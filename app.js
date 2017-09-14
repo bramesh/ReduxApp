@@ -28,7 +28,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //API START
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/residentdb');
+
+//Local db
+//mongoose.connect('mongodb://localhost/residentdb');
+
+//Mongo lab db
+mongoose.connect('mongodb://ramesh:ramesh@ds059496.mlab.com:59496/residentdb')
 
 var Residents = require('./models/residents.js');
 
