@@ -1,0 +1,50 @@
+[{
+	residentName: 'Resident1',
+	residentId: 101,
+	diseases: [{
+		diseaseName: 'as asdi wl',
+		level: '3',
+		proficiency: 'partial',
+		notes: [{
+			text: 'He is doing a pretty good job',
+			date: '12121212'
+		}, {
+			text: 'Needs some improvement',
+			date: '52122554'
+		}]
+	}, {
+		diseaseName: 'lwer sdfow sldf',
+		level: '2',
+		proficiency: 'full',
+		notes: [{
+			text: 'Well done',
+			date: '2343434'
+		}, {
+			text: 'Keep it up',
+			date: '23434343'
+		}]
+	}]
+}, {
+	residentName: 'Resident2',
+	residentId: 102,
+	diseases: [{
+		diseaseName: 'erowe sdfpw ls',
+		level: '1',
+		proficiency: 'partial',
+		notes: [{
+			text: 'Not bad',
+			date: '12121212'
+		}, {
+			text: 'Doing good now',
+			date: '52122554'
+		}]
+	}, {
+		diseaseName: 'wlsdf wlksd er',
+		level: '3',
+		proficiency: 'full',
+		notes: [{
+			text: 'Can help senior doctors',
+			date: '2343434'
+		}]
+	}]
+}]
