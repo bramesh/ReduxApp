@@ -1,25 +1,40 @@
 import React from 'react';
+import classnames from 'classnames';
+import LevelComponent from '../LevelComponent';
 
-import {connect} from 'react-redux';
+const defaultProps = {
+	display: false
+}
 
 class LevelsList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {diseases:[]}
+	}
+
+	getLevels() {
+		
 	}
 	
 	render() {
-		console.log(this.props.diseases.diseases)
+		const {display, ...others} = this.props;
+		const customClassNames = classnames(
+				{
+					displayLevelsList: display
+				},
+				'levelsList'
+			)
 		return(
-			<h1>Hello</h1>
+			<div className={customClassNames}>
+				<h3>{this.props.diseaseLevel}</h3>
+				<LevelComponent level={1} />
+				<LevelComponent level={2} />
+				<LevelComponent level={3} />
+				<LevelComponent level={4} />
+				<LevelComponent level={5} />
+			</div>
 		)
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		diseases: state.diseases
-	}
-}
-
-export default connect(mapStateToProps)(LevelsList);
+LevelsList.defaultProps = defaultProps;
+export default LevelsList;

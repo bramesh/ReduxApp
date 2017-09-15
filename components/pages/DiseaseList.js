@@ -3,12 +3,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {Grid, Row, Col, ListGroup, ListGroupItem, Glyphicon} from 'react-bootstrap';
-import { BrowserRouter, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import LevelsList from './LevelsList';
 
 class DiseaseList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {diseases: false}
+		this.state = {
+			diseases: false,
+			levelsList: false,
+			diseaseListClassName: ''
+		}
 	}
 
 	componentWillReceiveProps() {
@@ -18,7 +23,24 @@ class DiseaseList extends React.Component {
 	}
 
 	handleClick(level) {
-		console.log('level')
+		this.setState({
+			levelsList: true,
+			diseaseListClassName: 'hideDiseaseList'
+		})
+	}
+
+	showLinks() {
+		const toggleList = () => {
+			this.setState({
+				levelsList: false,
+				diseaseListClassName: ''
+			})
+		}
+		if(this.state.levelsList) {
+			return <a href='#' onClick={toggleList}>Go to DiseaseList</a>
+		} else {
+			return <NavLink to='/'>Go to Residents</NavLink>
+		}
 	}
 
 	createItems() {
@@ -27,13 +49,16 @@ class DiseaseList extends React.Component {
 			if(diseases && Object.keys(diseases).length) {
 				return diseases.map(function(disease) {
 					return(
-						<button type='button' key={disease.diseaseName} className='list-group-item' style={{outline: 'none'}} onClick={this.handleClick.bind(this)}>
-							{disease.diseaseName}
-							<span className='pull-right'>									
-								Level {disease.level}
-								&nbsp;&nbsp;&nbsp;
-								<Glyphicon glyph="chevron-right" />									
-							</span>
+						<button type='button' key={disease.diseaseName} 
+							className={`list-group-item ${this.state.diseaseListClassName}`} 
+							style={{outline: 'none'}}
+							onClick={this.handleClick.bind(this)}>
+								{disease.diseaseName}
+								<span className='pull-right'>									
+									Level {disease.level}
+									&nbsp;&nbsp;&nbsp;
+									<Glyphicon glyph="chevron-right" />									
+								</span>
 						</button>
 					)
 				}, this)
@@ -43,16 +68,18 @@ class DiseaseList extends React.Component {
 
 	render() {
 		const showDiseases = null || this.createItems();
-		return(
+		const links = null || this.showLinks();
+		const ShowList = () => (
 			<Grid>
-				<NavLink to='/'>Go to Residents</NavLink>
-				<span className='pull-right'>
-					<NavLink to='/levels'>Go to Levels list</NavLink>
-				</span>
+				{links}
 				<ListGroup>
 					{showDiseases}
 				</ListGroup>
+				<LevelsList display={this.state.levelsList} />
 			</Grid>
+		)
+		return(
+			<ShowList />
 		)
 	}
 }

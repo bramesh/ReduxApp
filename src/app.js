@@ -5,7 +5,6 @@ import {Provider} from 'react-redux';
 
 import ResidentList from '../components/pages/ResidentList';
 import DiseaseList from '../components/pages/DiseaseList';
-import LevelsList from '../components/pages/LevelsList';
 
 import {createStore, applyMiddleware} from 'redux';
 import {logger} from 'redux-logger';
@@ -32,7 +31,6 @@ const AppRoutes = () => (
 		<div>
 			<Route path="/" exact component={ResidentList} />
 			<Route path="/diseases" component={DiseaseList} />
-			<Route path="/levels" component={LevelsList} />
 		</div>
 	)
 
