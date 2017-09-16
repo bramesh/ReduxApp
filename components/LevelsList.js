@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import LevelComponent from '../LevelComponent';
+import LevelComponent from './LevelComponent';
 
 const defaultProps = {
 	display: false

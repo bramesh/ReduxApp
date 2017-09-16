@@ -16,8 +16,8 @@ class LevelComponent extends React.Component {
 							{this.props.level}
 						</div>
 						<div className='col-sm-3'>
-							<input type='checkbox' /> Partial Proficiency <br />
-							<input type='checkbox' /> Full Proficiency
+							<span className='glyphicon glyphicon-ok' style={{color:'green'}}></span> &nbsp; Partial Proficiency <br />
+							<span className='glyphicon glyphicon-time'></span> &nbsp; Full Proficiency
 						</div>
 					</div>
 				</form>

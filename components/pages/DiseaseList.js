@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {Grid, Row, Col, ListGroup, ListGroupItem, Glyphicon} from 'react-bootstrap';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
-import LevelsList from './LevelsList';
+import LevelsList from '../LevelsList';
 
 class DiseaseList extends React.Component {
 	constructor(props) {
