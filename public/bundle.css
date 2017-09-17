@@ -2,10 +2,10 @@ body {
   background: white; }
 
 /****LEVELS LIST STYLES*****/
-.levelsList {
+.hideLevelsList {
   display: none; }
 
-.displayLevelsList.levelsList {
+.displayLevelsList {
   display: block; }
 
 /*****DIESEASE LIST STYLES*****/

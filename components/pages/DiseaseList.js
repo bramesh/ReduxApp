@@ -5,14 +5,17 @@ import {connect} from 'react-redux';
 import {Grid, Row, Col, ListGroup, ListGroupItem, Glyphicon} from 'react-bootstrap';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import LevelsList from '../LevelsList';
+import LevelComponent from '../LevelComponent';
 
 class DiseaseList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			diseases: false,
-			levelsList: false,
-			diseaseListClassName: ''
+			diseaseListClassName: '',
+			diseaseId: null,
+			levels: [],
+			showLevels: 'hideLevelsList'
 		}
 	}
 
@@ -21,22 +24,16 @@ class DiseaseList extends React.Component {
 			diseases: true
 		})
 	}
-
-	handleClick(level) {
-		this.setState({
-			levelsList: true,
-			diseaseListClassName: 'hideDiseaseList'
-		})
-	}
+	
 
 	showLinks() {
 		const toggleList = () => {
 			this.setState({
-				levelsList: false,
-				diseaseListClassName: ''
+				diseaseListClassName: '',
+				showLevels: 'hideLevelsList'
 			})
 		}
-		if(this.state.levelsList) {
+		if(this.state.showLevels === 'displayLevelsList') {
 			return <a href='#' onClick={toggleList}>Go to DiseaseList</a>
 		} else {
 			return <NavLink to='/'>Go to Residents</NavLink>
@@ -52,10 +49,10 @@ class DiseaseList extends React.Component {
 						<button type='button' key={disease.diseaseName} 
 							className={`list-group-item ${this.state.diseaseListClassName}`} 
 							style={{outline: 'none'}}
-							onClick={this.handleClick.bind(this)}>
+							onClick={this.levelsList.bind(this, disease.diseaseId)}>
 								{disease.diseaseName}
 								<span className='pull-right'>									
-									Level {disease.level}
+									Level {disease.currentLevel}
 									&nbsp;&nbsp;&nbsp;
 									<Glyphicon glyph="chevron-right" />									
 								</span>
@@ -63,6 +60,29 @@ class DiseaseList extends React.Component {
 					)
 				}, this)
 			}
+		}
+	}
+	
+
+	levelsList(diseaseId) {
+		if(diseaseId) {
+			const diseases = this.props.diseases.diseases;
+			const levels = []
+			let currentDisease = {};
+			diseases.map(function(disease) {
+				if(disease.diseaseId === diseaseId) {
+					currentDisease = disease;
+				}
+			});
+			currentDisease.levels.map((level) => {
+				return levels.push(<LevelComponent key={level.level} level={level.level} />)
+			})
+			this.setState({
+				diseaseListClassName: 'hideDiseaseList',
+				diseaseId: diseaseId,
+				levels: levels,
+				showLevels: 'displayLevelsList'
+			})
 		}
 	}
 
@@ -75,7 +95,9 @@ class DiseaseList extends React.Component {
 				<ListGroup>
 					{showDiseases}
 				</ListGroup>
-				<LevelsList display={this.state.levelsList} />
+				<div className={this.state.showLevels}>
+					{this.state.levels}
+				</div>
 			</Grid>
 		)
 		return(

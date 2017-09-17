@@ -33,13 +33,14 @@ var mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost/residentdbnew');
 
 //Mongo lab db
-mongoose.connect('mongodb://ramesh:ramesh@ds135624.mlab.com:35624/residentdbnew')
+mongoose.connect('mongodb://ramesh:ramesh@ds139844.mlab.com:39844/residentdblatest')
 
 var Residents = require('./models/residents.js');
 
 //Get Residents list
 app.get('/residents', function(req, res) {
-	Residents.find(function(err, residents) {
+	var query = {}
+	Residents.find(query, 'residentName residentId', function(err, residents) {
 		if(err) {
 			throw err;
 		} else {
