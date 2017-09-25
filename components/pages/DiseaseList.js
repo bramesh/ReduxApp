@@ -25,7 +25,7 @@ class DiseaseList extends React.Component {
 		})
 	}
 	
-
+	/*Navigation Links*/
 	showLinks() {
 		const toggleList = () => {
 			this.setState({
@@ -40,7 +40,7 @@ class DiseaseList extends React.Component {
 		}
 	}
 
-	createItems() {
+	createDiseaseList() {
 		if(this.state.diseases) {
 			const diseases = this.props.diseases.diseases;
 			if(diseases && Object.keys(diseases).length) {
@@ -75,7 +75,7 @@ class DiseaseList extends React.Component {
 				}
 			});
 			currentDisease.levels.map((level) => {
-				return levels.push(<LevelComponent key={level.level} level={level.level} />)
+				return levels.push(<LevelComponent key={level.level} level={level.level} proficiency={level.proficiency} />)
 			})
 			this.setState({
 				diseaseListClassName: 'hideDiseaseList',
@@ -87,7 +87,7 @@ class DiseaseList extends React.Component {
 	}
 
 	render() {
-		const showDiseases = null || this.createItems();
+		const showDiseases = null || this.createDiseaseList();
 		const links = null || this.showLinks();
 		const ShowList = () => (
 			<Grid>
